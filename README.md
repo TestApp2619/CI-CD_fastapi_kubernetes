@@ -95,3 +95,4 @@ kubectl delete service fastapi-service
 minikube stop
 ```
 <!-- Trigger workflow -->
+<!-- Trigger workflow again -->
