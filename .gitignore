@@ -1,0 +1,11 @@
+# Ignore JetBrains IDE files
+.idea
+
+# Ignore Python bytecode
+__pycache__
+
+# Ignore virtual environment
+.venv
+
+# Ignore macOS specific files
+.DS_Store
