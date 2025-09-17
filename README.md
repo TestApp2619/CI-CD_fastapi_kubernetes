@@ -166,6 +166,8 @@ To use the CI/CD pipeline, you need to configure the following secrets in your G
 
 **Important:** The CI/CD pipeline is configured to deploy to a cloud-based Kubernetes cluster. It will not work with a local Minikube cluster out of the box, as the GitHub Actions runner cannot access your local machine.
 
+![Workflow Diagram](workflow.png)
+
 ## 7. Clean Up
 
 ### 7.1. Local Deployment (Minikube)
