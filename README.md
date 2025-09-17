@@ -25,7 +25,7 @@ For cloud deployment, you will need a Kubernetes cluster on a cloud provider lik
     ```bash
     uv venv
     source .venv/bin/activate
-    uv pip install -r requirements.txt
+    uv add -r requirements.txt
     ```
 
 ## 3. Dockerization
@@ -96,7 +96,24 @@ docker build -t fastapi-k8s:latest .
 
 ### 4.2. Cloud Deployment (GKE)
 
-For cloud deployment, the `service.yaml` is configured to use a `LoadBalancer`. This will provision a cloud load balancer to expose the service to the internet.
+For cloud deployment, it is recommended to change the `service.yaml` to use a `LoadBalancer` type. This will provision a cloud load balancer to expose the service to the internet.
+
+**Before deploying to GKE, modify `service.yaml` as follows:**
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-service
+spec:
+  selector:
+    app: fastapi
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer # Change from NodePort to LoadBalancer
+```
 
 1.  **Create a GKE cluster** (or any other cloud-based Kubernetes cluster).
 
