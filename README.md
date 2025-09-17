@@ -118,7 +118,34 @@ The application will be available at `http://localhost:8080`.
     ```
     Open the returned URL in your browser. You should see `{"Hello":"World"}`.
 
-## 5. Clean Up
+## 5. CI/CD with GitHub Actions
+
+This project is configured with a CI/CD pipeline using GitHub Actions. The workflow is defined in the `.github/workflows/main.yml` file.
+
+### 5.1. The Workflow
+
+The workflow has two jobs:
+
+*   **`build-and-push`:** This job is triggered on every push to the `main` branch. It builds the Docker image and pushes it to Docker Hub.
+*   **`deploy`:** This job is triggered after the `build-and-push` job is successful. It connects to your Kubernetes cluster and deploys the new image.
+
+### 5.2. Set Up Secrets
+
+To use the CI/CD pipeline, you need to configure the following secrets in your GitHub repository settings under "Settings" > "Secrets and variables" > "Actions":
+
+*   **`DOCKERHUB_USERNAME`:** Your Docker Hub username.
+*   **`DOCKERHUB_TOKEN`:** A Docker Hub access token with "Read, Write, Delete" permissions.
+*   **`KUBECONFIG`:** The content of your flattened `kubeconfig` file for your Kubernetes cluster.
+
+**Important:** The CI/CD pipeline is configured to deploy to a cloud-based Kubernetes cluster. It will not work with a local Minikube cluster out of the box, as the GitHub Actions runner cannot access your local machine.
+
+To deploy to a cloud-based Kubernetes cluster (e.g., GKE, EKS, AKS), you need to:
+1.  Create a Kubernetes cluster on a cloud provider.
+2.  Get the `kubeconfig` for the new cluster.
+3.  Generate a flattened `kubeconfig` with embedded credentials using `kubectl config view --flatten`.
+4.  Add the content of the flattened `kubeconfig` as the `KUBECONFIG` secret in your GitHub repository.
+
+## 6. Clean Up
 
 To remove the resources created in this guide, run the following commands:
 
