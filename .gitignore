@@ -3,6 +3,7 @@
 
 # Ignore Python bytecode
 __pycache__
+/__pycache__/
 
 # Ignore virtual environment
 .venv
