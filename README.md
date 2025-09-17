@@ -94,3 +94,4 @@ kubectl delete deployment fastapi-deployment
 kubectl delete service fastapi-service
 minikube stop
 ```
+<!-- Trigger workflow -->
